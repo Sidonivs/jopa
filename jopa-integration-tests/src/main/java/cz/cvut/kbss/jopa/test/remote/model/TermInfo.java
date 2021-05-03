@@ -1,4 +1,4 @@
-package cz.cvut.kbss.jopa.test;
+package cz.cvut.kbss.jopa.test.remote.model;
 
 import cz.cvut.kbss.jopa.model.MultilingualString;
 import cz.cvut.kbss.jopa.model.annotations.*;

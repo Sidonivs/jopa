@@ -1,4 +1,4 @@
-package cz.cvut.kbss.jopa.test;
+package cz.cvut.kbss.jopa.test.remote.model;
 
 import cz.cvut.kbss.jopa.model.MultilingualString;
 import cz.cvut.kbss.jopa.model.annotations.*;
@@ -30,8 +30,7 @@ public class Term {
             "SELECT ?child WHERE { ?this skos:narrower ?child . }", fetchType = FetchType.EAGER)
     private Set<TermInfo> children;
 
-    @Sparql(query = "PREFIX skos: <http://www.w3.org/2004/02/skos/core#> " +
-            "ASK { ?this skos:topConceptOf ?glossary . }", fetchType = FetchType.EAGER)
+    @Sparql(query = "ASK { ?glossary <http://www.w3.org/2004/02/skos/core#hasTopConcept> ?this . }", fetchType = FetchType.EAGER)
     private Boolean root;
 
     @Inferred
