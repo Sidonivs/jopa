@@ -1245,6 +1245,7 @@ public class MetamodelFactory {
                                                Identifier idMock) throws NoSuchFieldException {
         when(etMock.getJavaType()).thenReturn(OWLClassWithQueryAttr.class);
         when(etMock.getIRI()).thenReturn(IRI.create(OWLClassWithQueryAttr.getClassIri()));
+        when(etMock.getName()).thenReturn(OWLClassWithQueryAttr.class.getSimpleName());
         when(etMock.getAttribute(OWLClassWithQueryAttr.getStrAttField().getName())).thenReturn(strAttMock);
         when(etMock.getQueryAttribute(OWLClassWithQueryAttr.getStrQueryAttField().getName())).thenReturn(strQueryAttMock);
 
@@ -1289,6 +1290,7 @@ public class MetamodelFactory {
         when(strQueryAttMock.getDeclaringType()).thenReturn(etMock);
         when(strQueryAttMock.getQuery()).thenReturn(
                 OWLClassWithQueryAttr.getStrQueryAttField().getAnnotation(Sparql.class).query());
+        when(strQueryAttMock.getConstraints()).thenReturn(new ParticipationConstraint[0]);
 
         when(entityQueryAttMock.getJavaField()).thenReturn(OWLClassWithQueryAttr.getEntityQueryAttField());
         when(entityQueryAttMock.getJavaType()).thenReturn(OWLClassWithQueryAttr.getEntityQueryAttField().getType());
@@ -1296,6 +1298,7 @@ public class MetamodelFactory {
         when(entityQueryAttMock.getDeclaringType()).thenReturn(etMock);
         when(entityQueryAttMock.getQuery()).thenReturn(
                 OWLClassWithQueryAttr.getEntityQueryAttField().getAnnotation(Sparql.class).query());
+        when(entityQueryAttMock.getConstraints()).thenReturn(new ParticipationConstraint[0]);
 
         when(etMock.getIdentifier()).thenReturn(idMock);
         when(idMock.getJavaField()).thenReturn(OWLClassWithQueryAttr.class.getDeclaredField("uri"));

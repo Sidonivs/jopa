@@ -17,6 +17,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
@@ -72,8 +74,8 @@ class DefaultPersistenceProviderResolverTest {
     }
 
     private void generateProviderFileContent(String content) throws Exception {
-        final File file = new File(Thread.currentThread().getContextClassLoader().getResource(
-                "META-INF/services/" + PersistenceProperties.JPA_PERSISTENCE_PROVIDER).getFile());
+        final File file = new File(URLDecoder.decode(Thread.currentThread().getContextClassLoader().getResource(
+                "META-INF/services/" + PersistenceProperties.JPA_PERSISTENCE_PROVIDER).getFile(), StandardCharsets.UTF_8.toString()));
         Files.write(file.toPath(), content.getBytes(), StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE);
     }
 }

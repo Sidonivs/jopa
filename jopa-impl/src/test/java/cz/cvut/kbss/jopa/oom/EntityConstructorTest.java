@@ -72,6 +72,8 @@ class EntityConstructorTest {
     void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
         when(mapperMock.getConfiguration()).thenReturn(new Configuration(Collections.emptyMap()));
+        when(mapperMock.getUow()).thenReturn(uowMock);
+        when(uowMock.getQueryFactory()).thenReturn(queryFactoryMock);
         this.mocks = new MetamodelMocks();
         this.descriptor = new EntityDescriptor();
         this.constructor = new EntityConstructor(mapperMock);
