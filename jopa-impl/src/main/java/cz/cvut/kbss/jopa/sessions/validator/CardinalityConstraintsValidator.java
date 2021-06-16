@@ -63,17 +63,20 @@ class CardinalityConstraintsValidator extends IntegrityConstraintsValidator {
         // Only proper attributes can have cardinality constraints
         if (attribute instanceof Attribute) {
             final Attribute<?, ?> att = (Attribute<?, ?>) attribute;
-            for (ParticipationConstraint pc : att.getConstraints()) {
-                validateParticipationConstraint(identifier, att.getJavaField(), valueCount, pc);
-            }
+            validateParticipationConstraintsForAttribute(identifier, attribute, valueCount, att.getConstraints());
             if (att.getConstraints().length == 0) {
                 validateNonEmpty(identifier, att, valueCount);
             }
         } else if (attribute instanceof QueryAttribute) {
             final QueryAttribute<?, ?> queryAtt = (QueryAttribute<?, ?>) attribute;
-            for (ParticipationConstraint pc : queryAtt.getConstraints()) {
-                validateParticipationConstraint(identifier, queryAtt.getJavaField(), valueCount, pc);
-            }
+            validateParticipationConstraintsForAttribute(identifier, attribute, valueCount, queryAtt.getConstraints());
+        }
+    }
+
+    private void validateParticipationConstraintsForAttribute(Object identifier, FieldSpecification<?, ?> attribute,
+                                                              int valueCount, ParticipationConstraint[] participationConstraints) {
+        for (ParticipationConstraint pc : participationConstraints) {
+            validateParticipationConstraint(identifier, attribute.getJavaField(), valueCount, pc);
         }
     }
 
